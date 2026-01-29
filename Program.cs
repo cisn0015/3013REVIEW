@@ -1,29 +1,88 @@
 ﻿using System;
-using System.Collections.Generic;
 
-class Program
+// loops
+
+// FOR LOOP
+
+
+/*class Program
 {
     static void Main()
     {
-        Dictionary<string, double> fruitPrices = new Dictionary<string, double>()
-        {
-            { "apples", 0.99 },
-            { "oranges", 0.50 },
-            { "bananas", 0.50 },
-            { "grapes", 2.99 },
-            { "blueberries", 1.99 }
-        };
+        double total = 0;
 
-        Console.Write("Enter the item you want (apples, oranges, bananas, grapes, blueberries): ");
-        string choice = (Console.ReadLine() ?? "").Trim().ToLower();
-
-        if (fruitPrices.TryGetValue(choice, out double price))
+        for (int i = 1; i <= 3; i++)
         {
-            Console.WriteLine($"Price for {choice}: {price:C}");
+            double grade = ReadDoubleInRange($"Enter exam grade #{i} (0-100): ", 0, 100);
+            total += grade;
         }
-        else
+
+        double avg = total / 3.0;
+
+        // If grades are out of 100, convert to a 0-1 fraction for percent formatting:
+        double avgAsPercent = avg / 100.0;
+
+        Console.WriteLine($"\nAverage Exam Grade: {avgAsPercent:P2}");
+    }
+
+    static double ReadDoubleInRange(string prompt, double min, double max)
+    {
+        while (true)
         {
-            Console.WriteLine("Error: Item not found. Check spelling and try again.");
+            Console.Write(prompt);
+            string? input = Console.ReadLine();
+
+            if (double.TryParse(input, out double value) && value >= min && value <= max)
+                return value;
+
+            Console.WriteLine($"Enter a number between {min} and {max}.");
+        }
+    }
+}*/
+
+
+
+// WHILE LOOP 
+
+
+class ProgramWhilE
+{
+    static void Main()
+    {
+        double total = 0;
+        int count = 0;
+
+        while (true)
+        {
+            double score = ReadDoubleInRange("Enter an exam score (0-100): ", 0, 100);
+            total += score;
+            count++;
+
+            Console.Write("Do you have another score to enter? (yes/no): ");
+            string answer = (Console.ReadLine() ?? "").Trim().ToLower();
+
+            if (answer != "yes" && answer != "y")
+                break;
+        }
+
+        double avg = total / count;
+        double avgAsPercent = avg / 100.0;
+
+        Console.WriteLine($"\nYou entered {count} score(s).");
+        Console.WriteLine($"Average: {avgAsPercent:P2}");
+    }
+
+    static double ReadDoubleInRange(string prompt, double min, double max)
+    {
+        while (true)
+        {
+            Console.Write(prompt);
+            string? input = Console.ReadLine();
+
+            if (double.TryParse(input, out double value) && value >= min && value <= max)
+                return value;
+
+            Console.WriteLine($"Enter a number between {min} and {max}.");
         }
     }
 }
